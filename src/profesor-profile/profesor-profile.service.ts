@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { ProfesorProfile, ProfesorProfileDocument } from './schemas/profesor-profile.schema';
 import { CreateProfesorProfileDto } from './dto/create-profesor-profile.dto';
 import { UpdateProfesorProfileDto } from './dto/update-profesor-profile.dto';
@@ -13,14 +13,14 @@ export class ProfesorProfileService {
 
   async create(userId: string, dto: CreateProfesorProfileDto): Promise<ProfesorProfile> {
     const profile = await this.profesorprofileModel.create({
-      user: userId,
+      user: new Types.ObjectId(userId),
       ...dto,
     });
     return profile;
   }
 
   async findByUserId(userId: string): Promise<ProfesorProfile | null> {
-    return this.profesorprofileModel.findOne({ user: userId }).populate('user', 'email role').exec();
+    return this.profesorprofileModel.findOne({ user: new Types.ObjectId(userId) }).populate('user', 'email role').exec();
   }
 
   async findAll(): Promise<ProfesorProfile[]> {
@@ -29,7 +29,7 @@ export class ProfesorProfileService {
 
   async update(userId: string, dto: UpdateProfesorProfileDto): Promise<ProfesorProfile> {
     const profile = await this.profesorprofileModel.findOneAndUpdate(
-      { user: userId },
+      { user: new Types.ObjectId(userId) },
       { $set: dto },
       { new: true },
     );
@@ -40,7 +40,7 @@ export class ProfesorProfileService {
   }
 
   async delete(userId: string): Promise<void> {
-    const result = await this.profesorprofileModel.deleteOne({ user: userId });
+    const result = await this.profesorprofileModel.deleteOne({ user: new Types.ObjectId(userId) });
     if (result.deletedCount === 0) {
       throw new NotFoundException('Profile no encontrado');
     }

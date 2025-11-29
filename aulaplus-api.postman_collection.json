@@ -505,6 +505,129 @@
           }
         }
       ]
+    },
+    {
+      "name": "Curso",
+      "item": [
+        {
+          "name": "Mis Cursos (Profesor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/curso/profesor/{{profesorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "curso",
+                "profesor",
+                "{{profesorId}}"
+              ]
+            },
+            "description": "Cursos del profesor"
+          },
+          "response": []
+        },
+        {
+          "name": "Mis Cursos (Estudiante)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/curso/estudiante/{{estudianteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "curso",
+                "estudiante",
+                "{{estudianteId}}"
+              ]
+            },
+            "description": "Cursos del estudiante"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints específicos de Curso"
+    },
+    {
+      "name": "Evaluación",
+      "item": [
+        {
+          "name": "Evaluaciones por Curso",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/evaluacion/curso/{{cursoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "evaluacion",
+                "curso",
+                "{{cursoId}}"
+              ]
+            },
+            "description": "Evaluaciones del curso"
+          },
+          "response": []
+        },
+        {
+          "name": "Registrar Notas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/evaluacion/registrar-notas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "evaluacion",
+                "registrar-notas"
+              ]
+            },
+            "description": "Registrar evaluación con notas",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cursoId\": \"{{cursoId}}\",\n  \"profesorId\": \"{{profesorId}}\",\n  \"titulo\": \"Examen Final\"\n}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints específicos de Evaluación"
     }
   ],
   "variable": [

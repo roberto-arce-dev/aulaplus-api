@@ -47,4 +47,18 @@ export class EvaluacionService {
       throw new NotFoundException(`Evaluacion con ID ${id} no encontrado`);
     }
   }
+  async findByCurso(cursoId: string): Promise<Evaluacion[]> {
+    return this.evaluacionModel.find({ curso: cursoId });
+  }
+  async findByEstudiante(estudianteId: string): Promise<Evaluacion[]> {
+    return this.evaluacionModel.find({ estudiante: estudianteId });
+  }
+  async registrarNotas(evaluacionDto: any): Promise<Evaluacion> {
+    // TODO: Implementar lógica de registro de notas
+    const evaluacion = await this.evaluacionModel.create(evaluacionDto);
+    return evaluacion;
+  }
+
+
+
 }

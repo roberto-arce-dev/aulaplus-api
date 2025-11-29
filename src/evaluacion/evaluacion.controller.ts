@@ -102,6 +102,64 @@ export class EvaluacionController {
     return { success: true, data, total: data.length };
   }
 
+  @Get('curso/:cursoId')
+  @ApiOperation({ summary: 'Obtener evaluaciones de un curso' })
+  @ApiParam({ name: 'cursoId', description: 'ID del curso' })
+  @ApiResponse({ status: 200, description: 'Lista de evaluaciones del curso' })
+  async findByCurso(@Param('cursoId') cursoId: string) {
+    const data = await this.evaluacionService.findByCurso(cursoId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('estudiante/:estudianteId')
+  @ApiOperation({ summary: 'Obtener evaluaciones de un estudiante' })
+  @ApiParam({ name: 'estudianteId', description: 'ID del estudiante' })
+  @ApiResponse({ status: 200, description: 'Notas del estudiante' })
+  async findByEstudiante(@Param('estudianteId') estudianteId: string) {
+    const data = await this.evaluacionService.findByEstudiante(estudianteId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Post('registrar-notas')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Registrar evaluación con notas' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        cursoId: { type: 'string', description: 'ID del curso' },
+        profesorId: { type: 'string', description: 'ID del profesor' },
+        titulo: { type: 'string', description: 'Título de la evaluación' },
+        notas: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              estudianteId: { type: 'string' },
+              nota: { type: 'number' },
+              observaciones: { type: 'string' }
+            }
+          }
+        }
+      },
+      required: ['cursoId', 'profesorId', 'titulo', 'notas']
+    }
+  })
+  @ApiResponse({ status: 201, description: 'Evaluación registrada exitosamente' })
+  async registrarNotas(@Body() evaluacionDto: {
+    cursoId: string;
+    profesorId: string;
+    titulo: string;
+    notas: Array<{ estudianteId: string; nota: number; observaciones?: string }>;
+  }) {
+    const data = await this.evaluacionService.registrarNotas(evaluacionDto);
+    return {
+      success: true,
+      message: 'Evaluación registrada exitosamente',
+      data,
+    };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener Evaluacion por ID' })
   @ApiParam({ name: 'id', description: 'ID del Evaluacion' })

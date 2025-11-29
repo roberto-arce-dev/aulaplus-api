@@ -46,4 +46,19 @@ export class CursoService {
       throw new NotFoundException(`Curso con ID ${id} no encontrado`);
     }
   }
+  async findByProfesor(profesorId: string): Promise<Curso[]> {
+    return this.cursoModel.find({ profesor: profesorId })
+      .populate('profesor', 'nombre email');
+  }
+  async findByEstudiante(estudianteId: string): Promise<Curso[]> {
+    return this.cursoModel.find({ estudiantes: estudianteId })
+      .populate('profesor', 'nombre email');
+  }
+  async findByColegio(colegioId: string): Promise<Curso[]> {
+    return this.cursoModel.find({ colegio: colegioId })
+      .populate('profesor', 'nombre email');
+  }
+
+
+
 }

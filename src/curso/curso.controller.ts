@@ -102,6 +102,33 @@ export class CursoController {
     return { success: true, data, total: data.length };
   }
 
+  @Get('profesor/:profesorId')
+  @ApiOperation({ summary: 'Obtener cursos de un profesor' })
+  @ApiParam({ name: 'profesorId', description: 'ID del profesor' })
+  @ApiResponse({ status: 200, description: 'Lista de cursos del profesor' })
+  async findByProfesor(@Param('profesorId') profesorId: string) {
+    const data = await this.cursoService.findByProfesor(profesorId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('estudiante/:estudianteId')
+  @ApiOperation({ summary: 'Obtener cursos de un estudiante' })
+  @ApiParam({ name: 'estudianteId', description: 'ID del estudiante' })
+  @ApiResponse({ status: 200, description: 'Lista de cursos del estudiante' })
+  async findByEstudiante(@Param('estudianteId') estudianteId: string) {
+    const data = await this.cursoService.findByEstudiante(estudianteId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('colegio/:colegioId')
+  @ApiOperation({ summary: 'Filtrar cursos por colegio' })
+  @ApiParam({ name: 'colegioId', description: 'ID del colegio' })
+  @ApiResponse({ status: 200, description: 'Lista de cursos del colegio' })
+  async findByColegio(@Param('colegioId') colegioId: string) {
+    const data = await this.cursoService.findByColegio(colegioId);
+    return { success: true, data, total: data.length };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener Curso por ID' })
   @ApiParam({ name: 'id', description: 'ID del Curso' })
