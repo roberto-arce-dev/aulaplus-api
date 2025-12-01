@@ -10,6 +10,11 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { EstudianteProfileModule } from './estudiante-profile/estudiante-profile.module';
 import { ProfesorProfileModule } from './profesor-profile/profesor-profile.module';
+import { ColegioModule } from './colegio/colegio.module';
+import { CursoModule } from './curso/curso.module';
+import { EstudianteModule } from './estudiante/estudiante.module';
+import { ProfesorModule } from './profesor/profesor.module';
+import { EvaluacionModule } from './evaluacion/evaluacion.module';
 
 @Module({
   imports: [
@@ -43,6 +48,11 @@ import { ProfesorProfileModule } from './profesor-profile/profesor-profile.modul
     EstudianteProfileModule,
     ProfesorProfileModule,
     UploadModule,
+    ColegioModule,
+    CursoModule,
+    EstudianteModule,
+    ProfesorModule,
+    EvaluacionModule,
   ],
   controllers: [AppController],
   providers: [
