@@ -355,7 +355,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Nombre Actualizado\",\n  \"telefono\": \"+51 987654321\"\n}"
+              "raw": "{\n  \"nombre\": \"Valor de nombre\",\n  \"telefono\": \"+51 900000000\",\n  \"grado\": \"Valor de grado\",\n  \"seccion\": \"Valor de seccion\",\n  \"apoderado\": \"Valor de apoderado\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/estudiante-profile/me",
@@ -447,7 +447,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Nombre Actualizado\",\n  \"telefono\": \"+51 987654321\"\n}"
+              "raw": "{\n  \"nombreCompleto\": \"Valor de nombreCompleto\",\n  \"telefono\": \"+51 900000000\",\n  \"especialidad\": \"Valor de especialidad\",\n  \"grados\": \"Valor de grados\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/profesor-profile/me",
